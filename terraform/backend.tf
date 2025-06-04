@@ -1,8 +1,8 @@
 terraform {
   backend "s3" {
-    bucket = "dev-caau-terraform-state"
+    bucket = "dev-rearc-terraform-state"
     key    = "rearc/terraform.tfstate"
-    region = "eu-west-1"
+    region = "ap-south-1"
     # dynamodb_table = "terraform-locks"   # Optional but recommended
     encrypt = true
   }

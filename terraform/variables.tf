@@ -1,7 +1,7 @@
 
 variable "region" {
   type    = string
-  default = "eu-west-1"
+  default = "ap-south-1"
 }
 variable "environment" {
   type    = string
