@@ -24,7 +24,7 @@ jobs:
       AWS_ACCOUNT: ${{ secrets.AWS_ACCOUNT }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      ECR_REPOSITORY: ${{ secrets.AWS_ACCOUNT }}.dkr.ecr.${{ env.ENV }}.amazonaws.com/${{ env.ENV }}-${{ env.PROJECT_NAME }}-quest
+    #  ECR_REPOSITORY: ${{ secrets.AWS_ACCOUNT }}.dkr.ecr.${{ env.ENV }}.amazonaws.com/${{ env.ENV }}-${{ env.PROJECT_NAME }}-quest
       IMAGE_TAG: 'latest'
       ECS_CLUSTER_NAME: ${{ env.ENV }}-${{ env.PROJECT_NAME }}-cluster
       ECS_SERVICE_NAME: ${{ env.ENV }}-${{ env.PROJECT_NAME }}-service
@@ -47,5 +47,7 @@ jobs:
       - name: Build, tag, and push Docker image to ECR
         working-directory: ./quest
         run: |
+          ECR_REPOSITORY="${{ secrets.AWS_ACCOUNT }}.dkr.ecr.${{ env.AWS_REGION }}.amazonaws.com/${{ env.ENV }}-${{ env.PROJECT_NAME }}-quest"
+          echo "ECR_REPOSITORY=$ECR_REPOSITORY" >> $GITHUB_ENV
           docker build -t ${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }} .
           docker push ${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
