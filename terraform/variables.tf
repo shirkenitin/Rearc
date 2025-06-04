@@ -14,7 +14,7 @@ variable "project_name" {
 
 variable "vpc_id" {
   type    = string
-  default = "vpc-0b1f4e232e4f681f2"
+  default = "vpc-05e17c74c9d28c359"
 }
 
 variable "secret_word" {
