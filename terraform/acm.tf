@@ -1,9 +1,6 @@
-resource "aws_route53_zone" "main" {
-  name = "${var.environment}-${var.project_name}-zone"
-}
 
 resource "aws_acm_certificate" "tls_cert" {
-  domain_name       = "app.example.com"
+  domain_name       = "rearccasestudy.com"
   validation_method = "DNS"
 
   lifecycle {
@@ -22,7 +19,7 @@ resource "aws_route53_record" "cert_validation" {
 
   name    = each.value.name
   type    = each.value.type
-  zone_id = aws_route53_zone.main.zone_id
+  zone_id = var.zone_id
   records = [each.value.value]
   ttl     = 60
 }

@@ -26,3 +26,10 @@ variable "subnet_ids" {
   description = "List of subnet IDs"
   type        = list(string)
 }
+
+
+
+variable "zone_id" {
+  type    = string
+  default = "Z03733131J509SKDTP7XZ"
+}
