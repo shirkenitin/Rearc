@@ -26,7 +26,7 @@ resource "aws_security_group" "lb" {
 
 resource "aws_lb" "quest_lb" {
   name               = "${var.environment}-${var.project_name}-quest-lb"
-  internal           = true
+  internal           = false   #  MUST be false for public access
   load_balancer_type = "application"
   subnets            = var.subnet_ids
   security_groups    = [aws_security_group.lb.id]
