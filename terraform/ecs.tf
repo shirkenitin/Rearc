@@ -38,15 +38,14 @@ resource "aws_ecs_task_definition" "quest" {
   container_definitions = jsonencode([
     {
       name      = "${var.environment}-${var.project_name}-backend"
-      #image     = "${aws_ecr_repository.quest.repository_url}:latest"
-      image     = "nginx"
+      image     = "${aws_ecr_repository.quest.repository_url}:latest"
       essential = true
       # Enable interactive command execution
       interactive    = true
       pseudoTerminal = true
       portMappings = [
         {
-          containerPort = 80
+          containerPort = 3000
           protocol      = "tcp"
         }
       ]
@@ -113,7 +112,7 @@ resource "aws_ecs_service" "quest" {
   load_balancer {
     target_group_arn = aws_lb_target_group.quest_lb_tg.arn
     container_name   = "${var.environment}-${var.project_name}-backend"
-    container_port   = 80
+    container_port   = 3000
   }
 
   tags = local.common_tags
@@ -128,8 +127,8 @@ resource "aws_security_group" "ecs_service" {
   vpc_id      = var.vpc_id
 
   ingress {
-    from_port       = 80
-    to_port         = 80
+    from_port       = 3000
+    to_port         = 3000
     protocol        = "tcp"
   #  security_groups = [aws_security_group.lb.id] ####update LB SG
   }
