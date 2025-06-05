@@ -63,3 +63,29 @@ jobs:
             --force-new-deployment
 
 
+      - name: Rollback on ECS failure
+        if: failure()  # only runs if previous steps failed
+        run: |
+          echo "Deployment failed. Rolling back to previous task definition..."
+          
+          CLUSTER="${{ env.ENV }}-${{ env.PROJECT_NAME }}-cluster"
+          SERVICE="${{ env.ENV }}-${{ env.PROJECT_NAME }}-service"
+
+          # Get previous task definition from service
+          PREV_TASK_DEF=$(aws ecs describe-services \
+            --cluster $CLUSTER \
+            --services $SERVICE \
+            --query "services[0].deployments[?status=='PRIMARY'].taskDefinition" \
+            --output text)
+
+          echo "Previous task definition: $PREV_TASK_DEF"
+
+          # Redeploy the old task definition
+          aws ecs update-service \
+            --cluster $CLUSTER \
+            --service $SERVICE \
+            --task-definition $PREV_TASK_DEF \
+            --force-new-deployment
+
+
+

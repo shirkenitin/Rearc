@@ -31,23 +31,22 @@ resource "aws_ecs_task_definition" "quest" {
   family                   = "${var.environment}-${var.project_name}-backend"
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
-  cpu                      = "1024"
-  memory                   = "2048"
+  cpu                      = "256"
+  memory                   = "512"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   task_role_arn            = aws_iam_role.ecs_task_execution_role.arn
   container_definitions = jsonencode([
     {
       name      = "${var.environment}-${var.project_name}-backend"
-      image     = "${aws_ecr_repository.quest.repository_url}:latest"
-      cpu       = 1024
-      memory    = 2048
+      #image     = "${aws_ecr_repository.quest.repository_url}:latest"
+      image     = "nginx"
       essential = true
       # Enable interactive command execution
       interactive    = true
       pseudoTerminal = true
       portMappings = [
         {
-          containerPort = 3000
+          containerPort = 80
           protocol      = "tcp"
         }
       ]
@@ -114,10 +113,11 @@ resource "aws_ecs_service" "quest" {
   load_balancer {
     target_group_arn = aws_lb_target_group.quest_lb_tg.arn
     container_name   = "${var.environment}-${var.project_name}-backend"
-    container_port   = 3000
+    container_port   = 80
   }
 
   tags = local.common_tags
+   depends_on = [aws_lb_listener.quest_lb_listener]
 }
 
 
@@ -128,10 +128,10 @@ resource "aws_security_group" "ecs_service" {
   vpc_id      = var.vpc_id
 
   ingress {
-    from_port       = 3000
-    to_port         = 3000
+    from_port       = 80
+    to_port         = 80
     protocol        = "tcp"
-    security_groups = [aws_security_group.lb.id] ####update LB SG
+  #  security_groups = [aws_security_group.lb.id] ####update LB SG
   }
 
   egress {
