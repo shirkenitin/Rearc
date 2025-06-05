@@ -1,4 +1,4 @@
-/*
+
 data "aws_iam_policy_document" "ecr_policy" {
   statement {
     sid    = "ECRFullAccessForAccount"
@@ -65,4 +65,3 @@ resource "aws_ecr_lifecycle_policy" "this" {
   )
 }
 
-*/
