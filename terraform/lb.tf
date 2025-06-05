@@ -29,7 +29,7 @@ resource "aws_lb" "quest_lb" {
   internal           = true
   load_balancer_type = "application"
   subnets            = var.subnet_ids
-  #security_groups    = [aws_security_group.lb.id]
+  security_groups    = [aws_security_group.lb.id]
 
   enable_deletion_protection = false
 
@@ -43,21 +43,11 @@ resource "aws_lb" "quest_lb" {
 
 resource "aws_lb_target_group" "quest_lb_tg" {
   name        = "${var.environment}-${var.project_name}-ecs-tg"
-  port        = 3000
+  port        = 80
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = var.vpc_id
   tags        = local.common_tags
-    health_check {
-    path                = "/"
-    protocol            = "HTTP"
-    interval            = 30
-    timeout             = 5
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    matcher             = "200"
-  }
-
   target_health_state {
     enable_unhealthy_connection_termination = false
   }
