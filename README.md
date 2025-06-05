@@ -29,7 +29,7 @@ The following AWS components are provisioned automatically:
 ---
 
 ## 🛠️ Project Structure
-
+<pre> ``` 
 ├── .github/workflows/
 │ ├── deployment.yml # CI/CD: build, push to ECR, ECS update
 │ ├── terraform.yml # Terraform CI/CD pipeline
@@ -45,6 +45,7 @@ The following AWS components are provisioned automatically:
 │ ├── variables.tf # Input variables
 │ └── outputs.tf # Outputs like ALB DNS
 └── README.md # This file
+``` </pre>
 
 ---
 
