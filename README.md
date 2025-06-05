@@ -25,7 +25,6 @@ The following AWS components are provisioned automatically:
 5. **Elastic Container Registry (ECR)** – to store Docker images  
 6. **AWS CloudWatch** – to monitor application logs  
 7. **VPC** – using default AWS VPC for networking  
-8. **AWS ACM** – (optional) for HTTPS via TLS/SSL certificates  
 
 ---
 
@@ -43,11 +42,9 @@ The following AWS components are provisioned automatically:
 ├── terraform/
 │ ├── ecs.tf # ECS cluster, task, and service
 │ ├── lb.tf # Load Balancer, listener, and target group
-| | ---------
 │ ├── variables.tf # Input variables
 │ └── outputs.tf # Outputs like ALB DNS
 └── README.md # This file
-
 
 ---
 
@@ -72,13 +69,27 @@ Add the following GitHub repository secrets for workflows to function:
 - Can be manually triggered from GitHub Actions tab 
 
 Below are some screenshot for AWS resources:
+
 ![alt text](image-1.png)
+
+
 ![alt text](image-2.png)
+
+
 ![alt text](image-3.png)
+
+
 ![alt text](image-4.png)
+
+
 ![alt text](image-5.png)
+
+
 ![alt text](image-6.png)
+
+
 ![alt text](image-7.png)
+
 
 
 ### 🚀 `deployment.yml` Workflow
