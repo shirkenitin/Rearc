@@ -34,12 +34,12 @@ The following AWS components are provisioned automatically:
 │ ├── deployment.yml # CI/CD: build, push to ECR, ECS update
 │ ├── terraform.yml # Terraform CI/CD pipeline
 │ └── destroy.yml # (Optional) Destroy AWS resources manually
-├── quest/
+├── quest/ #application code
 │ ├── bin/
 │ ├── src/
-│ ├── Dockerfile
+│ ├── Dockerfile   #docker file to build application image
 │ └── package.json
-├── terraform/
+├── terraform/  #all terraform codes
 │ ├── ecs.tf # ECS cluster, task, and service
 │ ├── lb.tf # Load Balancer, listener, and target group
 │ ├── variables.tf # Input variables
@@ -60,7 +60,8 @@ Add the following GitHub repository secrets for workflows to function:
 - `AWS_ACCOUNT`  
 
 
-![alt text](image.png)
+![alt text](screenshots/secrets.png)
+
 
 ---
 
@@ -71,25 +72,32 @@ Add the following GitHub repository secrets for workflows to function:
 
 Below are some screenshot for AWS resources:
 
-![alt text](image-1.png)
+![alt text](screenshots/terraform-workflow-run.png)
 
 
-![alt text](image-2.png)
+
+![alt text](screenshots/alb.png)
 
 
-![alt text](image-3.png)
+
+![alt text](screenshots/ecr-image.png)
 
 
-![alt text](image-4.png)
+![alt text](screenshots/ecs-service-health.png)
 
 
-![alt text](image-5.png)
+
+![alt text](screenshots/ecs-service.png)
 
 
-![alt text](image-6.png)
+![alt text](screenshots/ecs-task-log.png)
 
 
-![alt text](image-7.png)
+
+![alt text](screenshots/ecs-task.png)
+
+
+
 
 
 
@@ -99,7 +107,10 @@ Below are some screenshot for AWS resources:
 - Pushes the image to Amazon ECR  
 - Updates ECS service with the new image version  
 
-![alt text](image-8.png)
+
+![alt text](screenshots/application.png)
+
+
 ---
 
 ## 🌐 Public Access
