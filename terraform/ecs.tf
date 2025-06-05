@@ -94,7 +94,7 @@ resource "aws_ecs_service" "quest" {
   network_configuration {
     subnets          = var.subnet_ids
     security_groups  = [aws_security_group.ecs_service.id]
-    assign_public_ip = false
+    assign_public_ip = true
   }
 
   deployment_controller {
@@ -130,7 +130,7 @@ resource "aws_security_group" "ecs_service" {
     from_port       = 3000
     to_port         = 3000
     protocol        = "tcp"
-  #  security_groups = [aws_security_group.lb.id] ####update LB SG
+    security_groups = [aws_security_group.lb.id] ####update LB SG
   }
 
   egress {
