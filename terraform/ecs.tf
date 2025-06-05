@@ -116,7 +116,7 @@ resource "aws_ecs_service" "quest" {
   }
 
   tags = local.common_tags
-   depends_on = [aws_lb_listener.https]
+   depends_on = [aws_lb_listener.quest_lb_listener]
 }
 
 
