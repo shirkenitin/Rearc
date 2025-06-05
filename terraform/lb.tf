@@ -4,8 +4,8 @@ resource "aws_security_group" "lb" {
   vpc_id      = var.vpc_id
 
   ingress {
-    from_port   = 80
-    to_port     = 80
+    from_port   = 3000
+    to_port     = 3000
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] 
   }
@@ -43,7 +43,7 @@ resource "aws_lb" "quest_lb" {
 
 resource "aws_lb_target_group" "quest_lb_tg" {
   name        = "${var.environment}-${var.project_name}-ecs-tg"
-  port        = 80
+  port        = 3000
   protocol    = "HTTP"
   target_type = "ip"
   vpc_id      = var.vpc_id
@@ -66,7 +66,7 @@ resource "aws_lb_target_group" "quest_lb_tg" {
 
 resource "aws_lb_listener" "quest_lb_listener" {
   load_balancer_arn = aws_lb.quest_lb.arn
-  port              = 80
+  port              = 3000
   protocol          = "HTTP"
   default_action {
     type             = "forward"
