@@ -108,7 +108,13 @@ Below are some screenshot for AWS resources:
 - Updates ECS service with the new image version  
 
 
+
+![alt text](screenshots/CICD.png)
+
+
+
 ![alt text](screenshots/application.png)
+
 
 
 ---
