@@ -59,7 +59,7 @@ resource "aws_ecs_task_definition" "quest" {
       }
       environment = [
         {
-          name  = "secret_word"
+          name  = "SECRET_WORD"
           value = "secret"
         }
       ]
