@@ -56,7 +56,7 @@ resource "aws_lb_target_group" "quest_lb_tg" {
 
 resource "aws_lb_listener" "quest_lb_listener" {
   load_balancer_arn = aws_lb.quest_lb.arn
-  port              = 3000
+  port              = 80
   protocol          = "HTTP"
   default_action {
     type             = "forward"
